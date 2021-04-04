@@ -5,26 +5,105 @@ date: "4/4/2021"
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+## Introduction
+
+Anthony and Ilya.
+
+## Formula and Basics
+
+Anthony and Ilya.
+
+## Loading required R packages
+
+```{r}
+library("readxl")
+library("class")
+library("tidyverse")
+library("gmodels")
 ```
 
-## R Markdown
+Anthony and Ilya.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Data description
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+Anthony and Ilya.
 
-```{r cars}
-summary(cars)
+## Examples of data and problem
+
+Anthony and Ilya.
+
+## Visualization
+
+Anthony and Ilya.
+
+## Analysis
+
+## Computation 
+
+```{r}
+flowers <- read_excel("IRIS.xlsx")
+flowers
+table(flowers$species) # It gives the number of indiviudal species
+
+flowers$species <- factor(flowers$species, levels = c("Iris-setosa", "Iris-versicolor", "Iris-virginica"), labels = c("ISE", "IVE", "IVI"))
+
+round(prop.table(table(flowers$species)) * 100, digits = 1)  # It gives the result in the percentage form rounded of to 1 decimal place( and so it’s digits = 1)
+
+# Normalize the data
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+}
+
+flowers_n <- as.data.frame(lapply(flowers[1:4], normalize))
+flowers_n
 ```
 
-## Including Plots
+## Interpretation
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+summary(flowers_n$sepal_length)
+summary(flowers_n$sepal_width)
+summary(flowers_n$petal_length)
+summary(flowers_n$petal_width)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Model Evaluation
+
+```{r}
+# Divide the data-set into training and testing sets.
+flowers_train <- flowers_n[1:90, ]
+flowers_test <- flowers_n[91:150, ]
+
+flowers_train_labels <- flowers[1:90, 1]
+flowers_test_labels <- flowers[91:150, 1] # This code takes the species factor in column 1 of the flowers data frame and on turn creates flowers_train_labels and flowers_test_labels data frame.
+```
+
+## Regression Line
+
+Ariel.
+
+## Model Assessment
+
+```{r}
+# Error to figure out on Tuesday.
+flowers_test_pred <- knn(train = flowers_train, test = flowers_test, cl = flowers_train_labels, k=12)
+
+CrossTable(x = flowers_test_labels, y = flowers_test_pred, prop.chisq = FALSE)
+```
+
+## Model Summary
+
+Sahil and Ariel.
+
+## Prediction and Model Accuracy
+
+Sahil and Ariel.
+
+## Conclusion
+
+Lekha and Trang.
+
+## Reference
+
+Lekha and Trang.
