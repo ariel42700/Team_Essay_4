@@ -42,7 +42,7 @@ Anthony and Ilya.
 
 ```{r}
 flowers <- read_excel("IRIS.xlsx")
-flowers
+
 table(flowers$species) # It gives the number of indiviudal species
 
 flowers$species <- factor(flowers$species, levels = c("Iris-setosa", "Iris-versicolor", "Iris-virginica"), labels = c("ISE", "IVE", "IVI"))
@@ -55,7 +55,8 @@ normalize <- function(x) {
 }
 
 flowers_n <- as.data.frame(lapply(flowers[1:4], normalize))
-flowers_n
+flowers_2 <- flowers[-5]
+flowers_2
 ```
 
 ## Interpretation
@@ -75,8 +76,8 @@ summary(flowers_n$petal_width)
 flowers_train <- flowers_n[1:90, ]
 flowers_test <- flowers_n[91:150, ]
 
-flowers_train_labels <- flowers[1:90, 1]
-flowers_test_labels <- flowers[91:150, 1] # This code takes the species factor in column 1 of the flowers data frame and on turn creates flowers_train_labels and flowers_test_labels data frame.
+flowers_train_labels <- flowers_2[1:90, ]
+flowers_test_labels <- flowers_2[91:150, ] # This code takes the species factor in column 1 of the flowers data frame and on turn creates flowers_train_labels and flowers_test_labels data frame.
 ```
 
 ## Regression Line
@@ -86,6 +87,8 @@ Ariel.
 ## Model Assessment
 
 ```{r}
+length(flowers_train)
+length(flowers_train_labels)
 # Error to figure out on Tuesday.
 flowers_test_pred <- knn(train = flowers_train, test = flowers_test, cl = flowers_train_labels, k=12)
 
