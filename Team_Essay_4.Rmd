@@ -7,11 +7,11 @@ output: pdf_document
 
 ## Introduction
 
-Anthony and Ilya.
+In this essay, our team will predict the species of a flower using the K Nearest Neighbors (KNN) algorithm. Given the sepal length, sepal width, petal length, and petal width in centimeters, we will classify the flower as either an Iris-setosa (ISE), Iris-versicolor (IVE), or Iris-virginica (IVI). Our dataset, flowers, contains 50 flowers from each of 3 species of iris. 
 
 ## Formula and Basics
 
-Anthony and Ilya.
+Anthony
 
 ## Loading required R packages
 
@@ -20,25 +20,20 @@ library("readxl")
 library("class")
 library("tidyverse")
 library("gmodels")
+library("flexplot")
 ```
 
 Anthony and Ilya.
 
 ## Data description
 
-Anthony and Ilya.
+Anthony
 
 ## Examples of data and problem
 
-Anthony and Ilya.
+Anthony
 
 ## Visualization
-
-Anthony and Ilya.
-
-## Analysis
-
-## Computation 
 
 ```{r}
 flowers <- read_excel("IRIS.xlsx")
@@ -47,6 +42,32 @@ table(flowers$species) # It gives the number of indiviudal species
 
 flowers$species <- factor(flowers$species, levels = c("Iris-setosa", "Iris-versicolor", "Iris-virginica"), labels = c("ISE", "IVE", "IVI"))
 
+my_cols <- c("#00AFBB", "#E7B800", "#FC4E07")  
+# Correlation panel
+panel.cor <- function(x, y){
+    usr <- par("usr"); on.exit(par(usr))
+    par(usr = c(0, 1, 0, 1))
+    r <- round(cor(x, y), digits=2)
+    txt <- paste0("R = ", r)
+    cex.cor <- 0.8/strwidth(txt)
+    text(0.5, 0.5, txt, cex = cex.cor * r)
+}
+# Customize upper panel
+upper.panel<-function(x, y){
+  points(x,y, pch = 19, col = my_cols[flowers$species])
+}
+# Create the plots
+pairs(flowers[,1:4], 
+      lower.panel = panel.cor,
+      upper.panel = upper.panel)
+```
+The scatter plot matrix above graphs all the pairs of predictor dimensions with the blue points representing the ISE species, the yellow points representing the IVE species, and the red points representing the IVI species. We observe that petal width and petal length are highly correlated with a value of R = 0.96 as well as sepal length and petal length with a value of R = 0.87.
+
+## Analysis
+
+## Computation 
+
+```{r}
 round(prop.table(table(flowers$species)) * 100, digits = 1)  # It gives the result in the percentage form rounded of to 1 decimal place( and so it’s digits = 1)
 
 # Normalize the data
@@ -55,7 +76,7 @@ normalize <- function(x) {
 }
 
 flowers_n <- as.data.frame(lapply(flowers[1:4], normalize))
-flowers_2 <- flowers[-5]
+flowers_2 <- flowers_n[-5]
 flowers_2
 ```
 
