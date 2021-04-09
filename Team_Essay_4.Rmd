@@ -24,16 +24,19 @@ library("flexplot")
 library("caret")
 ```
 
-Anthony and Ilya.
-
 ## Data description
 
-Anthony
+- Sepal_length: represents length of a flower's sepals
+- Sepal_width: represents width of a flower's sepals
+- Petal_length: represents length of a flower's petals
+- Petal_width: represents width of a flower's petals 
+- Species: indicates the species of the flower (Iris-setosa, Iris-versicolor, Iris-virginica)
 
 ## Examples of data and problem
-
-Anthony
-
+```{r}
+flower_data <- read_excel("IRIS.xlsx")
+flower_data
+```
 ## Visualization
 
 ```{r}
