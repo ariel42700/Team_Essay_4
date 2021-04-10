@@ -11,7 +11,14 @@ In this essay, our team will predict the species of a flower using the K Nearest
 
 ## Formula and Basics
 
-Anthony
+  The KNN algorithm is one the most commonly used and simplest in the machine learning field. The way it works is that it takes a new data point and categorizes it based on it's similarity to its neighboring points. The number of neighbors that it is compared to is dependent on the selected K value, a K value of 3 would compare the uncategorized data point to three of it's neighbors. Determining which K number of neighbors are the nearest is based on different distance formulas such Euclidean, Manhattan, and Minkowski. In our case we utilized the euclidean distance formula to do so. This uses the coordinates of the uncategorized data point and one of it's numbers to determine a euclidean distance, the data points with the lowest distances will then be selected for comparison. 
+  
+  $$\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
+  
+  - $x_1$ is the x coordinate of the first point
+  - $y_1$ is the coordinate of the first point
+  - $x_2$ is the x coordinate of the second point
+  - $y_2$ is the coordinate of the second point
 
 ## Loading required R packages
 
